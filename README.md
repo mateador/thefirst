@@ -1,2 +1,2 @@
 # thefirst
-First PWA projecr
+First PWA project
