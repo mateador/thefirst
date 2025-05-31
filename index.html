@@ -17,7 +17,35 @@
     <a href="https://github.com/mateador/thefirst/">https://github.com/mateador/thefirst/</a> and 
     to change the necessary settings to your needs.
   </p>
+  
+    <button id="startBtn">Start Recording</button>
+    <button id="stopBtn">Stop Recording</button>
 
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+
+        let audioContext;
+        let recorder;
+
+        startBtn.addEventListener('click', () => {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(stream => {
+                    audioContext = new AudioContext();
+                    recorder = new MediaRecorder(stream);
+                    recorder.start();
+                })
+                .catch(error => {
+                    console.error('Error accessing microphone:', error);
+                });
+        });
+
+        stopBtn.addEventListener('click', () => {
+            if (recorder) {
+                recorder.stop();
+            }
+        });
+    </script>
   <script>
       if (navigator.serviceWorker) {
         navigator.serviceWorker.register (
